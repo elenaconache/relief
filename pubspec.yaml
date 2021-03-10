@@ -24,6 +24,8 @@ dependencies:
   dio: ^3.0.10
   json_annotation: ^3.1.0
   sqflite:
+  flutter_svg: ^0.19.3
+  shared_preferences: ^0.5.12+4
 
 
 dev_dependencies:
@@ -45,10 +47,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: RacingSansOne
+      fonts:
+        - asset: assets/fonts/RacingSansOne-Regular.ttf
+          style: normal
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          style: normal
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
