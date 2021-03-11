@@ -152,12 +152,18 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
               )));
         },
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            print('success, user is ${state.user}');
+          }
+        },
       ),
     );
   }
 
   _onFacebookLogin() {
+    final cubit = context.cubit<LoginCubit>();
+    cubit.signIn();
     print('facebook login');
   }
 

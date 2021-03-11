@@ -41,5 +41,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<array>
+        <string>fb442426990202525</string>
+      </array>
+
 </dict>
+<key>FacebookAppID</key>
+<string>442426990202525</string>
+<key>FacebookDisplayName</key>
+<string>Relief</string>
 </plist>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "369508257127",
+    "project_id": "relief-7531f",
+    "storage_bucket": "relief-7531f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369508257127:android:0281e9c9156f2e26ec73c2",
+        "android_client_info": {
+          "package_name": "ro.codeswitch.relief"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369508257127-ig8tesqov053nkqh5pkpbj90m9qpsme1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRbWpM_E_-kN9AepcR6gLixoBXLh0hMy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369508257127-ig8tesqov053nkqh5pkpbj90m9qpsme1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

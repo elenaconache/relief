@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:relief/dependency_injection.dart';
 import 'package:relief/navigation/page_config.dart';
@@ -7,6 +8,7 @@ import 'package:relief/navigation/relief_router_delegate.dart';
 void main() async {
   inject();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
