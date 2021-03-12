@@ -14,10 +14,20 @@ import 'package:relief/values/styles.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  State createState() => LoginScreenState();
+  State createState() => _LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,18 +95,22 @@ class LoginScreenState extends State<LoginScreen> {
                               .get<TranslationsHelper>()
                               .getTranslation('general_email'),
                           isPassword: false,
+                          controller: _emailController,
                         )),
                     Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 8),
-                        child: ReliefTextField(
-                            inputType: TextInputType.visiblePassword,
-                            validate: (String value) {
-                              return value.isNotEmpty;
-                            },
-                            hintText: getIt
-                                .get<TranslationsHelper>()
-                                .getTranslation('general_password'),
-                            isPassword: true)),
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 8),
+                      child: ReliefTextField(
+                        inputType: TextInputType.visiblePassword,
+                        validate: (String value) {
+                          return value.isNotEmpty;
+                        },
+                        hintText: getIt
+                            .get<TranslationsHelper>()
+                            .getTranslation('general_password'),
+                        isPassword: true,
+                        controller: _passwordController,
+                      ),
+                    ),
                     Spacer(),
                     Padding(
                         padding: EdgeInsets.only(top: 12, left: 20, right: 20),
@@ -174,6 +188,9 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   _onLogin() {
+    final cubit = context.cubit<LoginCubit>();
+    cubit.signInWithEmail(
+        _emailController.value.text, _passwordController.value.text);
     print('email login');
   }
 

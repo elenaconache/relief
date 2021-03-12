@@ -7,6 +7,7 @@ import 'package:relief/data/repository/database_repository.dart';
 import 'package:relief/data/repository/shared_preferences_repository.dart';
 import 'package:relief/data/repository/social_signin_repository.dart';
 import 'package:relief/data/repository/translations_repository.dart';
+import 'package:relief/data/repository/users_repository.dart';
 import 'package:relief/data/translations_helper.dart';
 import 'package:relief/navigation/relief_router_delegate.dart';
 
@@ -24,9 +25,12 @@ void inject() {
       ));
   getIt.registerLazySingleton<SocialSignInRepository>(
       () => SocialSignInRepository());
+  getIt.registerLazySingleton<UsersRepository>(() => UsersRepository());
 
-  getIt.registerFactory<LoginCubit>(
-      () => LoginCubit(getIt.get<SocialSignInRepository>()));
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(
+      getIt.get<SocialSignInRepository>(),
+      getIt.get<UsersRepository>(),
+      getIt.get<SharedPreferencesRepository>()));
   getIt.registerLazySingleton<DatabaseRepository>(() => DatabaseRepository());
   getIt.registerLazySingleton<ReliefRouterDelegate>(
       () => ReliefRouterDelegate());

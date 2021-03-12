@@ -7,21 +7,23 @@ class ReliefTextField extends StatefulWidget {
   final TextInputType inputType;
   final String hintText;
   final bool isPassword;
+  final TextEditingController controller;
 
   const ReliefTextField(
       {Key key,
       @required this.validate,
       @required this.inputType,
       @required this.hintText,
-      @required this.isPassword})
+      @required this.isPassword,
+      @required this.controller})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ReliefTextFieldState();
+  State<StatefulWidget> createState() => _ReliefTextFieldState();
 }
 
-class ReliefTextFieldState extends State<ReliefTextField> {
-  bool isValid = true;
+class _ReliefTextFieldState extends State<ReliefTextField> {
+  bool _isValid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +39,11 @@ class ReliefTextFieldState extends State<ReliefTextField> {
         fillColor: fillInputColor,
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: isValid ? Colors.amber : errorColor, width: 2),
+                color: _isValid ? Colors.amber : errorColor, width: 2),
             borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: isValid ? fillInputColor : errorColor, width: 2),
+                color: _isValid ? fillInputColor : errorColor, width: 2),
             borderRadius: BorderRadius.circular(8)),
         hintStyle: hintTextStyle,
         hintText: widget.hintText,
@@ -49,7 +51,7 @@ class ReliefTextFieldState extends State<ReliefTextField> {
       keyboardType: widget.inputType,
       onChanged: (value) {
         setState(() {
-          isValid = widget.validate.call(value);
+          _isValid = widget.validate.call(value);
         });
       },
       enableSuggestions: !widget.isPassword,
@@ -57,6 +59,7 @@ class ReliefTextFieldState extends State<ReliefTextField> {
       obscureText: widget.isPassword,
       textInputAction: TextInputAction.next,
       style: inputTextStyle,
+      controller: widget.controller,
     );
   }
 }

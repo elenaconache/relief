@@ -36,7 +36,8 @@ class SocialSignInRepository {
         email: user.email,
         countryTag: null,
         pictureUrl: user.photoUrl,
-        availableSessions: 0);
+        availableSessions: 0,
+        token: googleAuth.accessToken);
     return profile;
   }
 
@@ -64,8 +65,9 @@ class SocialSignInRepository {
           password: null,
           email: user['email'],
           countryTag: null,
-          pictureUrl: user['picture'],
-          availableSessions: 0);
+          pictureUrl: user['picture']['data']['url'],
+          availableSessions: 0,
+          token: myToken.token);
       return profile;
     } else if (result.status == FacebookLoginStatus.error) {
       print('result is ${result.errorMessage}');

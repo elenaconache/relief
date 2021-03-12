@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:relief/data/model/login_body.dart';
+import 'package:relief/data/model/relief_user.dart';
+import 'package:relief/data/model/social_login_body.dart';
 import 'package:relief/data/model/translation.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,4 +15,13 @@ abstract class RestClient {
 
   @GET("data/Translation")
   Future<List<Translation>> getTranslations();
+
+  @POST("users/login")
+  Future<ReliefUser> login(@Body() LoginBody user);
+
+  @POST("users/social/facebook/sdk/login")
+  Future<ReliefUser> loginWithFacebook(@Body() SocialLoginBody user);
+
+  @POST("users/social/googleplus/sdk/login")
+  Future<ReliefUser> loginWithGoogle(@Body() SocialLoginBody user);
 }

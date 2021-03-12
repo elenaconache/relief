@@ -1,9 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 const keyCurrentLanguage = 'currentLanguage';
+const keyCurrentToken = 'userToken';
 
 class SharedPreferencesRepository {
-  saveString(String key, String value) async {
+  Future<void> saveString(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(key, value);
   }
