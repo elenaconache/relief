@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:relief/data/model/user.dart';
+import 'package:relief/data/model/relief_user.dart';
 
 abstract class LoginState extends Equatable {}
 

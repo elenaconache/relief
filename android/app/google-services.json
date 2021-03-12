@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "369508257127-kvknllksnd5qhs7jv9sfhdt4b4qci808.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ro.codeswitch.relief",
+            "certificate_hash": "e4dbab2abb914d40b3a4bcdc3663c7e940a1df82"
+          }
+        },
+        {
+          "client_id": "369508257127-tbhaq8qrqbmbeopa7jabvf8tq4j7houf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ro.codeswitch.relief",
+            "certificate_hash": "fc824dc2de3d25699218878c5929e9914f441d80"
+          }
+        },
+        {
           "client_id": "369508257127-ig8tesqov053nkqh5pkpbj90m9qpsme1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "369508257127-ig8tesqov053nkqh5pkpbj90m9qpsme1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "369508257127-9e29lveepobbtpdjn0ccpgtvqd7f537t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ro.codeswitch.relief"
+              }
             }
           ]
         }

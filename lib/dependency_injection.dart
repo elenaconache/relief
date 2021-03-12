@@ -1,4 +1,6 @@
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
 import 'package:relief/blocs/splash/splash_cubit.dart';
 import 'package:relief/data/repository/database_repository.dart';
@@ -11,6 +13,9 @@ import 'package:relief/navigation/relief_router_delegate.dart';
 final getIt = GetIt.instance;
 
 void inject() {
+  getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());
+  getIt.registerLazySingleton<FacebookLogin>(() => FacebookLogin());
+
   getIt.registerLazySingleton<TranslationsRepository>(
       () => TranslationsRepository());
   getIt.registerFactory<SplashCubit>(() => SplashCubit(

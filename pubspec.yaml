@@ -25,12 +25,13 @@ dependencies:
   json_annotation: ^3.1.0
   sqflite:
   flutter_svg: ^0.19.3
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.4
   http: any
   flutter_facebook_login: ^3.0.0
-  firebase_core: ^0.5.0
+  firebase_core: ^0.3.4
   firebase_analytics: ^5.0.6
-  firebase_auth: ^0.18.0
+  firebase_auth: ^0.9.0
+  google_sign_in: ^4.5.9
 
 
 dev_dependencies:

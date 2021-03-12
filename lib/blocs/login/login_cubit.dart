@@ -1,7 +1,6 @@
 import 'package:cubit/cubit.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:relief/blocs/login/login_states.dart';
-import 'package:relief/data/model/user.dart';
+import 'package:relief/data/model/relief_user.dart';
 import 'package:relief/data/repository/social_signin_repository.dart';
 
 class LoginCubit extends CubitStream<LoginState> {
@@ -9,9 +8,8 @@ class LoginCubit extends CubitStream<LoginState> {
 
   final SocialSignInRepository socialSignInRepository;
 
-  void signIn() async {
+  void signInWithFacebook() async {
     emit(LoginLoading());
-    await Firebase.initializeApp();
     try {
       ReliefUser facebookUser =
           await socialSignInRepository.loginWithFacebook();
@@ -21,5 +19,16 @@ class LoginCubit extends CubitStream<LoginState> {
       print(e);
       emit(LoginError());
     }
+  }
+
+  void signInWithGoogle() async {
+    emit(LoginLoading());
+    socialSignInRepository.loginWithGoogle().then((value) {
+      print(value);
+      emit(LoginSuccess(user: value));
+    }).catchError((e) {
+      print(e);
+      emit(LoginError());
+    });
   }
 }

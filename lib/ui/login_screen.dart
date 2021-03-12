@@ -163,11 +163,13 @@ class LoginScreenState extends State<LoginScreen> {
 
   _onFacebookLogin() {
     final cubit = context.cubit<LoginCubit>();
-    cubit.signIn();
+    cubit.signInWithFacebook();
     print('facebook login');
   }
 
   _onGoogleLogin() {
+    final cubit = context.cubit<LoginCubit>();
+    cubit.signInWithGoogle();
     print('google login');
   }
 
