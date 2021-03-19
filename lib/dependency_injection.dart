@@ -2,6 +2,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
+import 'package:relief/blocs/register/register_cubit.dart';
 import 'package:relief/blocs/splash/splash_cubit.dart';
 import 'package:relief/data/repository/database_repository.dart';
 import 'package:relief/data/repository/shared_preferences_repository.dart';
@@ -31,6 +32,9 @@ void inject() {
       getIt.get<SocialSignInRepository>(),
       getIt.get<UsersRepository>(),
       getIt.get<SharedPreferencesRepository>()));
+  getIt.registerFactory<RegisterCubit>(
+      () => RegisterCubit(getIt.get<UsersRepository>()));
+
   getIt.registerLazySingleton<DatabaseRepository>(() => DatabaseRepository());
   getIt.registerLazySingleton<ReliefRouterDelegate>(
       () => ReliefRouterDelegate());

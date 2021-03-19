@@ -4,7 +4,7 @@ import 'package:relief/values/colors.dart';
 
 const mottoTextStyle = TextStyle(
   letterSpacing: 0.2,
-  color: Colors.amber,
+  color: Colors.white,
   fontSize: 14,
   fontFamily: 'RacingSansOne',
 );

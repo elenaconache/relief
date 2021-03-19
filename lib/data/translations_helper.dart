@@ -18,9 +18,21 @@ class TranslationsHelper {
 
   String getTranslation(String tag) {
     if (currentLanguage == Language.ROMANIAN) {
-      return _translations.firstWhere((element) => element.tag == tag).ro;
+      return _translations
+              .firstWhere(
+                (element) => element.tag == tag,
+                orElse: () => null,
+              )
+              ?.ro ??
+          '';
     }
-    return _translations.firstWhere((element) => element.tag == tag).en;
+    return _translations
+            .firstWhere(
+              (element) => element.tag == tag,
+              orElse: () => null,
+            )
+            ?.en ??
+        '';
   }
 
   Future<void> setCurrentLanguage(Language currentLanguage) async {

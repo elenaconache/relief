@@ -2,12 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
 import 'package:relief/blocs/login/login_states.dart';
 import 'package:relief/data/translations_helper.dart';
 import 'package:relief/dependency_injection.dart';
+import 'package:relief/navigation/page_config.dart';
+import 'package:relief/navigation/relief_router_delegate.dart';
+import 'package:relief/ui/common/relief_background.dart';
 import 'package:relief/ui/common/relief_button.dart';
+import 'package:relief/ui/common/relief_fab.dart';
+import 'package:relief/ui/common/relief_logo.dart';
 import 'package:relief/ui/common/relief_text_field.dart';
 import 'package:relief/values/colors.dart';
 import 'package:relief/values/styles.dart';
@@ -31,140 +36,110 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: CubitConsumer<LoginCubit, LoginState>(
         builder: (context, state) {
-          return Scaffold(
-              resizeToAvoidBottomInset: true,
-              body: SingleChildScrollView(
+          return SingleChildScrollView(
+              child: ReliefBackground(
                   child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: SvgPicture.asset(
-                        'assets/images/header.svg',
-                        color: Colors.amber,
-                        height: 100,
-                      ),
-                    ),
-                    Image.asset(
-                      'assets/images/logo_amber.png',
-                      width: 120,
-                      height: 120,
-                    ),
-                    Text(
-                      getIt
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ReliefLogo(),
+                Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 64),
+                    child: ReliefTextField(
+                      inputType: TextInputType.emailAddress,
+                      validate: (String value) {
+                        return value.isNotEmpty;
+                      },
+                      hintText: getIt
                           .get<TranslationsHelper>()
-                          .getTranslation('login_motto'),
-                      textAlign: TextAlign.center,
-                      style: mottoTextStyle,
-                    ),
-                    Spacer(),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: ReliefButton(
-                            iconPath: 'assets/images/fb.svg',
+                          .getTranslation('general_email'),
+                      isPassword: false,
+                      controller: _emailController,
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20, top: 8),
+                  child: ReliefTextField(
+                    inputType: TextInputType.visiblePassword,
+                    validate: (String value) {
+                      return value.isNotEmpty;
+                    },
+                    hintText: getIt
+                        .get<TranslationsHelper>()
+                        .getTranslation('general_password'),
+                    isPassword: true,
+                    controller: _passwordController,
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(top: 16, left: 20, right: 20),
+                    child: ReliefButton(
+                        iconPath: '',
+                        text: getIt
+                            .get<TranslationsHelper>()
+                            .getTranslation('general_login'),
+                        onClick: () => {_onLogin()},
+                        color: Colors.orangeAccent,
+                        iconColor: Colors.white)),
+                Padding(
+                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: RichText(
+                          text: TextSpan(
                             text: getIt
                                 .get<TranslationsHelper>()
-                                .getTranslation('login_facebook'),
-                            onClick: () => {_onFacebookLogin()},
-                            color: blueFacebookColor,
-                            iconColor: Colors.white)),
-                    Padding(
-                        padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                        child: ReliefButton(
-                            iconPath: 'assets/images/google.svg',
-                            text: getIt
-                                .get<TranslationsHelper>()
-                                .getTranslation('login_google'),
+                                .getTranslation('general_forgot_password'),
+                            style: linkTextStyle,
+                            recognizer: new TapGestureRecognizer()
+                              ..onTap = () {
+                                _onForgotPassword();
+                              },
+                          ),
+                        ))),
+                Spacer(),
+                Padding(
+                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: ReliefButton(
+                                  iconPath: '',
+                                  text: getIt
+                                      .get<TranslationsHelper>()
+                                      .getTranslation('general_register'),
+                                  onClick: () => {_onRegister()},
+                                  color: Colors.orangeAccent,
+                                  iconColor: Colors.white)),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8, right: 8),
+                            child: ReliefFab(
+                              icon: FaIcon(
+                                FontAwesomeIcons.facebookF,
+                                color: Colors.white,
+                              ),
+                              onClick: () => {_onFacebookLogin()},
+                              color: blueFacebookColor,
+                            ),
+                          ),
+                          ReliefFab(
+                            icon: FaIcon(
+                              FontAwesomeIcons.googlePlusG,
+                              color: Colors.white,
+                            ),
                             onClick: () => {_onGoogleLogin()},
                             color: redGoogleColor,
-                            iconColor: Colors.white)),
-                    Spacer(),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 24),
-                        child: ReliefTextField(
-                          inputType: TextInputType.emailAddress,
-                          validate: (String value) {
-                            return value
-                                .isNotEmpty; //RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
-                          },
-                          hintText: getIt
-                              .get<TranslationsHelper>()
-                              .getTranslation('general_email'),
-                          isPassword: false,
-                          controller: _emailController,
-                        )),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 8),
-                      child: ReliefTextField(
-                        inputType: TextInputType.visiblePassword,
-                        validate: (String value) {
-                          return value.isNotEmpty;
-                        },
-                        hintText: getIt
-                            .get<TranslationsHelper>()
-                            .getTranslation('general_password'),
-                        isPassword: true,
-                        controller: _passwordController,
-                      ),
-                    ),
-                    Spacer(),
-                    Padding(
-                        padding: EdgeInsets.only(top: 12, left: 20, right: 20),
-                        child: ReliefButton(
-                            iconPath: '',
-                            text: getIt
-                                .get<TranslationsHelper>()
-                                .getTranslation('general_login'),
-                            onClick: () => {_onLogin()},
-                            color: Colors.orangeAccent,
-                            iconColor: Colors.white)),
-                    Padding(
-                        padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 1,
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: getIt
-                                        .get<TranslationsHelper>()
-                                        .getTranslation(
-                                            'general_forgot_password'),
-                                    style: linkTextStyle,
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () {
-                                        _onForgotPassword();
-                                      },
-                                  ),
-                                )),
-                            Expanded(
-                                flex: 1,
-                                child: ReliefButton(
-                                    iconPath: '',
-                                    text: getIt
-                                        .get<TranslationsHelper>()
-                                        .getTranslation('general_register'),
-                                    onClick: () => {_onRegister()},
-                                    color: Colors.orangeAccent,
-                                    iconColor: Colors.white))
-                          ],
-                        )),
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: SvgPicture.asset(
-                        'assets/images/footer.svg',
-                        color: Colors.amber,
-                        height: 100,
-                      ),
-                    ),
-                  ],
-                ),
-              )));
+                          ),
+                        ])),
+                Spacer(),
+              ],
+            ),
+          )));
         },
         listener: (context, state) {
           if (state is LoginSuccess) {
@@ -196,6 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _onRegister() {
     print('register');
+    final delegate = getIt.get<ReliefRouterDelegate>();
+    delegate.addPage(RegisterPageConfig);
   }
 
   void _onForgotPassword() {

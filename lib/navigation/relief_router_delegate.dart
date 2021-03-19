@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
+import 'package:relief/blocs/register/register_cubit.dart';
 import 'package:relief/blocs/splash/splash_cubit.dart';
 import 'package:relief/dependency_injection.dart';
 import 'package:relief/navigation/page_config.dart';
 import 'package:relief/ui/login_screen.dart';
+import 'package:relief/ui/register_screen.dart';
 import 'package:relief/ui/splash_screen.dart';
 
 class ReliefRouterDelegate extends RouterDelegate<PageConfiguration>
@@ -98,6 +100,14 @@ class ReliefRouterDelegate extends RouterDelegate<PageConfiguration>
                 child: LoginScreen(),
               ),
               LoginPageConfig);
+          break;
+        case ReliefPage.Register:
+          _addPageData(
+              CubitProvider<RegisterCubit>(
+                create: (context) => getIt.get<RegisterCubit>(),
+                child: RegisterScreen(),
+              ),
+              RegisterPageConfig);
           break;
         default:
           break;

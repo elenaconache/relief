@@ -15,6 +15,8 @@ class ReliefRouteParser extends RouteInformationParser<PageConfiguration> {
         return SplashPageConfig;
       case LoginPath:
         return LoginPageConfig;
+      case RegisterPath:
+        return RegisterPageConfig;
       default:
         return SplashPageConfig;
     }
