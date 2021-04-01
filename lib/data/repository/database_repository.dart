@@ -25,9 +25,6 @@ class DatabaseRepository {
     var list = List.generate(maps.length, (i) {
       return Translation.fromJson(maps[i]);
     });
-    list.forEach((element) {
-      print(element);
-    });
     return list;
   }
 }

@@ -21,6 +21,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    print('init state');
     _getTranslationsRequest();
   }
 

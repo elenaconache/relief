@@ -60,7 +60,7 @@ class ReliefButton extends StatelessWidget {
   ButtonStyle _getElevatedButtonStyle() {
     return ElevatedButton.styleFrom(
       primary: color,
-      shape: new RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(8.0),
       ),
     );

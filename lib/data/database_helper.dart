@@ -22,7 +22,7 @@ class DatabaseHelper {
     await db
         .execute('''CREATE TABLE $translationsTable($columnId TEXT PRIMARY KEY,
         $columnEn TEXT NOT NULL,$columnRo TEXT NOT NULL,
-        $columnTag TEXT NOT NULL)''');
+        $columnTag TEXT NOT NULL UNIQUE)''');
   }
 
   Future<Database> get database async {

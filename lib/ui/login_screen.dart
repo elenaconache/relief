@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,25 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _ongoingValidation;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _ongoingValidation = false;
+    _emailController.addListener(() {
+      setState(() {});
+    });
+    _passwordController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -51,27 +65,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.only(left: 20, right: 20, top: 64),
                     child: ReliefTextField(
                       inputType: TextInputType.emailAddress,
-                      validate: (String value) {
-                        return value.isNotEmpty;
+                      validate: () {
+                        return !_ongoingValidation ||
+                            _emailController.text.isNotEmpty;
                       },
                       hintText: getIt
                           .get<TranslationsHelper>()
                           .getTranslation('general_email'),
                       isPassword: false,
                       controller: _emailController,
+                      errorMessageTag: 'error_empty_field',
                     )),
                 Padding(
                   padding: EdgeInsets.only(left: 20, right: 20, top: 8),
                   child: ReliefTextField(
                     inputType: TextInputType.visiblePassword,
-                    validate: (String value) {
-                      return value.isNotEmpty;
+                    validate: () {
+                      return !_ongoingValidation ||
+                          _passwordController.text.isNotEmpty;
                     },
                     hintText: getIt
                         .get<TranslationsHelper>()
                         .getTranslation('general_password'),
                     isPassword: true,
                     controller: _passwordController,
+                    errorMessageTag: 'error_empty_field',
                   ),
                 ),
                 Padding(
@@ -81,7 +99,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: getIt
                             .get<TranslationsHelper>()
                             .getTranslation('general_login'),
-                        onClick: () => {_onLogin()},
+                        onClick: () {
+                          if (_isValidLoginForm()) {
+                            _onLogin();
+                          }
+                        },
                         color: Colors.orangeAccent,
                         iconColor: Colors.white)),
                 Padding(
@@ -144,33 +166,47 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginSuccess) {
             print('success, user is ${state.user}');
+          } else if (state is LoginError) {
+            Flushbar(
+              message: getIt
+                  .get<TranslationsHelper>()
+                  .getTranslation(state.errorMessageTag),
+              duration: Duration(seconds: 2),
+            )..show(context);
           }
         },
       ),
     );
   }
 
+  bool _isValidLoginForm() {
+    bool valid =
+        !(_emailController.text.isEmpty || _passwordController.text.isEmpty);
+
+    if (!valid)
+      setState(() {
+        _ongoingValidation = true;
+      });
+    return valid;
+  }
+
   _onFacebookLogin() {
     final cubit = context.cubit<LoginCubit>();
     cubit.signInWithFacebook();
-    print('facebook login');
   }
 
   _onGoogleLogin() {
     final cubit = context.cubit<LoginCubit>();
     cubit.signInWithGoogle();
-    print('google login');
   }
 
   _onLogin() {
     final cubit = context.cubit<LoginCubit>();
     cubit.signInWithEmail(
         _emailController.value.text, _passwordController.value.text);
-    print('email login');
   }
 
   _onRegister() {
-    print('register');
     final delegate = getIt.get<ReliefRouterDelegate>();
     delegate.addPage(RegisterPageConfig);
   }

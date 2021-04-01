@@ -18,9 +18,14 @@ class _RestClient implements RestClient {
   String baseUrl;
 
   @override
-  Future<List<Translation>> getTranslations() async {
+  Future<List<Translation>> getTranslations(pageSize, offset) async {
+    ArgumentError.checkNotNull(pageSize, 'pageSize');
+    ArgumentError.checkNotNull(offset, 'offset');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageSize': pageSize,
+      r'offset': offset
+    };
     final _data = <String, dynamic>{};
     final _result = await _dio.request<List<dynamic>>('data/Translation',
         queryParameters: queryParameters,
@@ -92,6 +97,25 @@ class _RestClient implements RestClient {
             baseUrl: baseUrl),
         data: _data);
     final value = ReliefUser.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<RegistrationResponse> register(user) async {
+    ArgumentError.checkNotNull(user, 'user');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(user?.toJson() ?? <String, dynamic>{});
+    final _result = await _dio.request<Map<String, dynamic>>('data/Users',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = RegistrationResponse.fromJson(_result.data);
     return value;
   }
 }

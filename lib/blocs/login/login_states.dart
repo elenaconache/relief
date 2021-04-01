@@ -24,8 +24,12 @@ class LoginSuccess extends LoginState {
 }
 
 class LoginError extends LoginState {
+  final String errorMessageTag;
+
+  LoginError({this.errorMessageTag});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [errorMessageTag];
 }
 
 class LoginEmpty extends LoginState {

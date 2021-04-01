@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
+import 'package:relief/data/model/registration_response.dart';
 
 abstract class RegisterState extends Equatable {}
 
@@ -13,17 +15,19 @@ class RegisterLoading extends RegisterState {
 }
 
 class RegisterSuccess extends RegisterState {
-  // final ReliefUser user;
+  final RegistrationResponse response;
 
-  // LoginSuccess({@required this.user});
+  RegisterSuccess({@required this.response});
 
   @override
-  List<Object> get props => [
-        /*user*/
-      ];
+  List<Object> get props => [response];
 }
 
 class RegisterError extends RegisterState {
+  final String errorMessageTag;
+
+  RegisterError({@required this.errorMessageTag});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [errorMessageTag];
 }
