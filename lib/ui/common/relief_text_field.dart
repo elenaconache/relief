@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relief/ui/common/error_text.dart';
 import 'package:relief/values/colors.dart';
+import 'package:relief/values/dimensions.dart';
 import 'package:relief/values/styles.dart';
 import 'package:relief/data/translations_helper.dart';
 import 'package:relief/dependency_injection.dart';
@@ -47,18 +48,18 @@ class _ReliefTextFieldState extends State<ReliefTextField> {
             contentPadding:
                 EdgeInsets.only(left: 16, top: 12, right: 16, bottom: 12),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(cornerRadius),
               borderSide: BorderSide.none,
             ),
             fillColor: fillInputColor,
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                    color: _isValid ? Colors.amber : errorColor, width: 2),
-                borderRadius: BorderRadius.circular(8)),
+                    color: _isValid ? yellowBorderColor : errorColor, width: 2),
+                borderRadius: BorderRadius.circular(cornerRadius)),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                     color: _isValid ? fillInputColor : errorColor, width: 2),
-                borderRadius: BorderRadius.circular(8)),
+                borderRadius: BorderRadius.circular(cornerRadius)),
             hintStyle: hintTextStyle,
             hintText: widget.hintText,
           ),

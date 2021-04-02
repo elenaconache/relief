@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
 import 'package:relief/blocs/register/register_cubit.dart';
+import 'package:relief/blocs/resetpassword/reset_password_cubit.dart';
 import 'package:relief/blocs/splash/splash_cubit.dart';
 import 'package:relief/dependency_injection.dart';
 import 'package:relief/navigation/page_config.dart';
 import 'package:relief/ui/login_screen.dart';
 import 'package:relief/ui/register_screen.dart';
+import 'package:relief/ui/reset_password_screen.dart';
 import 'package:relief/ui/splash_screen.dart';
 
 class ReliefRouterDelegate extends RouterDelegate<PageConfiguration>
@@ -66,10 +68,11 @@ class ReliefRouterDelegate extends RouterDelegate<PageConfiguration>
 
   MaterialPage _createPage(Widget child, PageConfiguration pageConfig) {
     return MaterialPage(
-        child: child,
-        key: Key(pageConfig.key),
-        name: pageConfig.path,
-        arguments: pageConfig);
+      child: child,
+      key: Key(pageConfig.key),
+      name: pageConfig.path,
+      arguments: pageConfig,
+    );
   }
 
   void _addPageData(Widget child, PageConfiguration pageConfig) {
@@ -109,10 +112,17 @@ class ReliefRouterDelegate extends RouterDelegate<PageConfiguration>
               ),
               RegisterPageConfig);
           break;
+        case ReliefPage.ResetPassword:
+          _addPageData(
+              CubitProvider<ResetPasswordCubit>(
+                create: (context) => getIt.get<ResetPasswordCubit>(),
+                child: ResetPasswordScreen(),
+              ),
+              ResetPasswordPageConfig);
+          break;
         default:
           break;
       }
-
       notifyListeners();
     }
   }

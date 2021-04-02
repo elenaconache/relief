@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:relief/values/colors.dart';
 
 class ReliefBackground extends StatelessWidget {
   final Widget child;
@@ -19,7 +20,7 @@ class ReliefBackground extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: SvgPicture.asset(
                   'assets/images/header_right.svg',
-                  color: Colors.amber,
+                  color: yellowIconColor,
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topRight,
                   height: MediaQuery.of(context).size.height * 0.7,
@@ -33,13 +34,13 @@ class ReliefBackground extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     'assets/images/footer_left.svg',
-                    color: Colors.amber,
+                    color: yellowIconColor,
                     fit: BoxFit.cover,
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
                   SvgPicture.asset(
                     'assets/images/footer_right.svg',
-                    color: Colors.amber,
+                    color: yellowIconColor,
                     fit: BoxFit.cover,
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),

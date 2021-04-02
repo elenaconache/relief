@@ -118,4 +118,21 @@ class _RestClient implements RestClient {
     final value = RegistrationResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<void> resetPassword(email) async {
+    ArgumentError.checkNotNull(email, 'email');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    await _dio.request<void>('users/restorepassword/$email',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    return null;
+  }
 }

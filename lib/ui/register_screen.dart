@@ -11,6 +11,7 @@ import 'package:relief/ui/common/relief_background.dart';
 import 'package:relief/ui/common/relief_button.dart';
 import 'package:relief/ui/common/relief_logo.dart';
 import 'package:relief/ui/common/relief_text_field.dart';
+import 'package:relief/values/dimensions.dart';
 import 'package:relief/values/styles.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -60,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     ReliefLogo(),
                     Padding(
-                        padding: EdgeInsets.only(top: 64),
+                        padding: EdgeInsets.only(top: extraLargeMargin),
                         child: ReliefTextField(
                           inputType: TextInputType.text,
                           validate: () {

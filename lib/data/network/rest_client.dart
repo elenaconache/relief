@@ -30,4 +30,7 @@ abstract class RestClient {
 
   @POST("data/Users")
   Future<RegistrationResponse> register(@Body() RegisterBody user);
+
+  @GET("users/restorepassword/{email}")
+  Future<void> resetPassword(@Path("email") String email);
 }

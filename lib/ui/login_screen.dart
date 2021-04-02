@@ -16,6 +16,7 @@ import 'package:relief/ui/common/relief_fab.dart';
 import 'package:relief/ui/common/relief_logo.dart';
 import 'package:relief/ui/common/relief_text_field.dart';
 import 'package:relief/values/colors.dart';
+import 'package:relief/values/dimensions.dart';
 import 'package:relief/values/styles.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -62,7 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 ReliefLogo(),
                 Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 64),
+                    padding: EdgeInsets.only(
+                        left: largeMargin,
+                        right: largeMargin,
+                        top: extraLargeMargin),
                     child: ReliefTextField(
                       inputType: TextInputType.emailAddress,
                       validate: () {
@@ -77,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       errorMessageTag: 'error_empty_field',
                     )),
                 Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 8),
+                  padding: EdgeInsets.only(
+                      left: largeMargin, right: largeMargin, top: smallMargin),
                   child: ReliefTextField(
                     inputType: TextInputType.visiblePassword,
                     validate: () {
@@ -93,7 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(top: 16, left: 20, right: 20),
+                    padding: EdgeInsets.only(
+                        top: mediumMargin,
+                        left: largeMargin,
+                        right: largeMargin),
                     child: ReliefButton(
                         iconPath: '',
                         text: getIt
@@ -107,7 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.orangeAccent,
                         iconColor: Colors.white)),
                 Padding(
-                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    padding: EdgeInsets.only(
+                        top: smallMargin,
+                        left: largeMargin,
+                        right: largeMargin),
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: RichText(
@@ -124,7 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ))),
                 Spacer(),
                 Padding(
-                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    padding: EdgeInsets.only(
+                        top: smallMargin,
+                        left: largeMargin,
+                        right: largeMargin),
                     child: Row(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -139,7 +153,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Colors.orangeAccent,
                                   iconColor: Colors.white)),
                           Padding(
-                            padding: EdgeInsets.only(left: 8, right: 8),
+                            padding: EdgeInsets.only(
+                                left: smallMargin, right: smallMargin),
                             child: ReliefFab(
                               icon: FaIcon(
                                 FontAwesomeIcons.facebookF,
@@ -212,6 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onForgotPassword() {
-    print('forgot password');
+    final delegate = getIt.get<ReliefRouterDelegate>();
+    delegate.addPage(ResetPasswordPageConfig);
   }
 }

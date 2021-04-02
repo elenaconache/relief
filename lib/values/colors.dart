@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const blueTextColor = Color(0xff3d90e3);
 const blueFacebookColor = Color(0xff3B599A);
@@ -9,3 +10,8 @@ const inputTextColor = Color(0xff050506);
 const hintTextColor = Color(0xffa1a9b4);
 const blueButtonColor = Color(0xff3d90e3);
 const greenButtonColor = Color(0xff44e1a9);
+
+const orangeTextColor = Colors.orangeAccent;
+const orangeButtonColor = Colors.orangeAccent;
+const yellowIconColor = Colors.amberAccent;
+const yellowBorderColor = Colors.amberAccent;

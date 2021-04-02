@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:relief/values/dimensions.dart';
 import 'package:relief/values/styles.dart';
 
 class ReliefButton extends StatelessWidget {
@@ -11,11 +12,11 @@ class ReliefButton extends StatelessWidget {
 
   const ReliefButton(
       {Key key,
-      @required this.iconPath,
+      this.iconPath = '',
       @required this.text,
       @required this.onClick,
       @required this.color,
-      @required this.iconColor})
+      this.iconColor = Colors.white})
       : super(key: key);
 
   @override
@@ -34,7 +35,8 @@ class ReliefButton extends StatelessWidget {
             label: Expanded(
               flex: 3,
               child: Padding(
-                padding: EdgeInsets.only(top: 12, bottom: 12),
+                padding: EdgeInsets.only(
+                    top: smallMediumMargin, bottom: smallMediumMargin),
                 child: Text(
                   text,
                   style: buttonTextStyle,
@@ -46,7 +48,8 @@ class ReliefButton extends StatelessWidget {
           )
         : ElevatedButton(
             child: Padding(
-              padding: EdgeInsets.only(top: 12, bottom: 12),
+              padding: EdgeInsets.only(
+                  top: smallMediumMargin, bottom: smallMediumMargin),
               child: Text(
                 text,
                 style: buttonTextStyle,
@@ -60,8 +63,9 @@ class ReliefButton extends StatelessWidget {
   ButtonStyle _getElevatedButtonStyle() {
     return ElevatedButton.styleFrom(
       primary: color,
+      elevation: elevation,
       shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(8.0),
+        borderRadius: new BorderRadius.circular(cornerRadius),
       ),
     );
   }

@@ -17,6 +17,8 @@ class ReliefRouteParser extends RouteInformationParser<PageConfiguration> {
         return LoginPageConfig;
       case RegisterPath:
         return RegisterPageConfig;
+      case ResetPasswordPath:
+        return ResetPasswordPageConfig;
       default:
         return SplashPageConfig;
     }
@@ -29,6 +31,8 @@ class ReliefRouteParser extends RouteInformationParser<PageConfiguration> {
         return const RouteInformation(location: SplashPath);
       case ReliefPage.Login:
         return const RouteInformation(location: LoginPath);
+      case ReliefPage.ResetPassword:
+        return const RouteInformation(location: ResetPasswordPath);
       default:
         return const RouteInformation(location: SplashPath);
     }

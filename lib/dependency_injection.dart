@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:relief/blocs/login/login_cubit.dart';
 import 'package:relief/blocs/register/register_cubit.dart';
+import 'package:relief/blocs/resetpassword/reset_password_cubit.dart';
 import 'package:relief/blocs/splash/splash_cubit.dart';
 import 'package:relief/data/repository/database_repository.dart';
 import 'package:relief/data/repository/shared_preferences_repository.dart';
@@ -34,6 +35,8 @@ void inject() {
       getIt.get<SharedPreferencesRepository>()));
   getIt.registerFactory<RegisterCubit>(
       () => RegisterCubit(getIt.get<UsersRepository>()));
+  getIt.registerFactory<ResetPasswordCubit>(
+      () => ResetPasswordCubit(getIt.get<UsersRepository>()));
 
   getIt.registerLazySingleton<DatabaseRepository>(() => DatabaseRepository());
   getIt.registerLazySingleton<ReliefRouterDelegate>(

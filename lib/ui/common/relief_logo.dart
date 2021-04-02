@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relief/data/translations_helper.dart';
 import 'package:relief/dependency_injection.dart';
+import 'package:relief/values/dimensions.dart';
 import 'package:relief/values/styles.dart';
 
 class ReliefLogo extends StatelessWidget {
@@ -8,11 +9,11 @@ class ReliefLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Padding(
-        padding: EdgeInsets.only(top: 48),
+        padding: EdgeInsets.only(top: largerMargin),
         child: Image.asset(
           'assets/images/logo_amber.png',
-          width: 120,
-          height: 120,
+          width: logoSize,
+          height: logoSize,
           color: Colors.white,
         ),
       ),

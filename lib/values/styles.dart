@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relief/values/colors.dart';
+import 'package:relief/values/dimensions.dart';
 
 const mottoTextStyle = TextStyle(
   letterSpacing: 0.2,
@@ -38,4 +39,17 @@ const errorTextStyle = TextStyle(
   fontSize: 14,
   letterSpacing: 0.4,
   color: errorColor,
+);
+final cardTitleTextStyle = TextStyle(
+  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w700,
+  fontSize: cardTitleTextSize,
+  letterSpacing: 0.5,
+  color: orangeTextColor,
+);
+final cardBodyTextStyle = TextStyle(
+  fontFamily: 'OpenSans',
+  fontSize: cardBodyTextSize,
+  letterSpacing: 0.5,
+  color: orangeTextColor,
 );

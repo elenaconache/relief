@@ -15,6 +15,42 @@ enum SocialLogin { FACEBOOK, GOOGLE }
 class UsersRepository {
   UsersRepository();
 
+  Future<BaseApiResponse<bool>> restorePassword(String email) async {
+    final dio = Dio();
+    final client = RestClient(dio);
+
+    return client.resetPassword(email).then((value) {
+      return BaseApiResponse<bool>()..data = true;
+    }).catchError((error) {
+      var errorResponse = BaseApiResponse<bool>();
+
+      if (error is DioError) {
+        print("Exception occured: $error");
+        String message = "";
+        int code = error.response.data["code"];
+        switch (code) {
+          case 2002:
+            message = 'api_error_invalid_app';
+            break;
+          case 3020:
+            message = 'api_error_email_not_found';
+            break;
+          case 3025:
+            message = 'api_error_password_recovery';
+            break;
+          default:
+            message = ApiError.mapMessage(error);
+            break;
+        }
+        errorResponse.error =
+            ApiError(errorCode: code, errorMessageTag: message);
+        print('error message from api: ${errorResponse.error}');
+      }
+
+      return errorResponse;
+    });
+  }
+
   Future<BaseApiResponse<ReliefUser>> login(
       String email, String password) async {
     final dio = Dio();
