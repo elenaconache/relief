@@ -197,6 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _passwordController.value.text, _usernameController.value.text);
       }
     } else {
+      print('invalid register form');
       setState(() {
         _ongoingValidation = true;
       });
@@ -218,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _isValidConfirmPassword(_confirmPasswordController.text) &&
         _isValidPassword() &&
         _isValidEmail(_emailController.text) &&
-        !_acceptedTerms;
+        _acceptedTerms;
     if (!valid) {
       setState(() {
         _ongoingValidation = true;
