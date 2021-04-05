@@ -151,7 +151,7 @@ class UsersRepository {
             message = 'api_error_already_exists';
             break;
           case 8000:
-            message = 'api_error_length';
+            message = 'api_error_property_exceeded';
             break;
           default:
             message = ApiError.mapMessage(error);

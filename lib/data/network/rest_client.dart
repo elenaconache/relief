@@ -11,11 +11,11 @@ part 'rest_client.g.dart';
 
 @RestApi(
     baseUrl:
-        "https://eu-api.backendless.com/F6A54640-91E5-D0DC-FF13-CC1C187D9700/6B0F25D5-E189-400F-8542-C3F52A78AD6D/")
+        "https://eu-api.backendless.com/E88CE5BA-3883-6C9B-FF1B-68B2BAC68100/32677EB4-8063-410E-9C57-B55D5CA35684/")
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
-  @GET("data/Translation")
+  @GET("data/Translations")
   Future<List<Translation>> getTranslations(
       @Query("pageSize") int pageSize, @Query("offset") int offset);
 
